@@ -8,7 +8,7 @@ module EmlToPdf
         pipe.close_write
         output = pipe.readlines.join
         pipe.close
-        unless $?.success?
+        unless $?.success? || output.include?('ContentNotFoundError')
           raise ConversionError, output
         end
       end
