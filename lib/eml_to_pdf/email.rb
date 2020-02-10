@@ -7,9 +7,9 @@ module EmlToPdf
   class Email
     TEMPLATES_PATH = Pathname.new(File.expand_path(__dir__)) + "templates"
 
-    def initialize(input_path)
+    def initialize(input_path_or_object)
       @input_path = input_path
-      @mail = Mail.read(input_path)
+      @mail = input_path_or_object.is_a?(String) ? Mail.read(input_path_or_object) : input_path_or_object
     end
 
     def to_html
